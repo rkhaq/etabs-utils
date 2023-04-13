@@ -8,13 +8,22 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: template-db
+      POSTGRES_DB: etabs-utils-db
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command:
+      [
+        './wait-for-it.sh',
+        'db:5432',
+        '--',
+        'python',
+        'manage.py',
+        'runserver',
+        '0.0.0.0:8000',
+      ]
     volumes:
       - .:/app
     ports:
