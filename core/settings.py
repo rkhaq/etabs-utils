@@ -61,11 +61,6 @@ INSTALLED_APPS = [
 
     # my apps
     'accounts',
-    'companies',
-    'projects',
-    'timesheets',
-    'payrolls',
-    'project_finances',
 ]
 
 MIDDLEWARE = [
@@ -134,14 +129,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True   
-ACCOUNT_USERNAME_REQUIRED = False
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'dj_rest_auth.registration.backends.EmailBackend',
     # 'allauth.account.auth_backends.AuthenticationBackend',
 )
 
@@ -177,10 +167,18 @@ from accounts.config.drf_cors_conf import CORS_ALLOW_CREDENTIALS, CORS_ALLOWED_O
 from accounts.config.drf_conf import REST_FRAMEWORK
 
 # For Django Allauth
-from accounts.config.allauth_conf import SITE_ID, LOGIN_REDIRECT_URL, SOCIALACCOUNT_PROVIDERS 
+from accounts.config.allauth_conf import (SITE_ID, 
+                                          LOGIN_REDIRECT_URL, 
+                                          SOCIALACCOUNT_PROVIDERS, 
+                                          ACCOUNT_AUTHENTICATION_METHOD, 
+                                          ACCOUNT_USER_MODEL_USERNAME_FIELD,
+                                          ACCOUNT_EMAIL_REQUIRED,  
+                                          ACCOUNT_USERNAME_REQUIRED,
+                                          ACCOUNT_EMAIL_VERIFICATION,
+                                          )
 
 # For Simple JWT
 from accounts.config.jwt_conf import SIMPLE_JWT
 
 # fro dj-rest-auth
-from accounts.config.dj_rest_auth_conf import REST_AUTH, REST_AUTH_SERIALIZERS
+from accounts.config.dj_rest_auth_conf import REST_AUTH

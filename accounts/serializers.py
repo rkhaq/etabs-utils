@@ -49,24 +49,14 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         return data
 
 
-
-User = get_user_model()
-
 class RegisterSerializer(DefaultRegisterSerializer):
     """
-    This serializer class is to overwrite the exisiting serializer in dj-rest-auth package
-    that requires username field. This will be exported to the dj_rest_auth_conf file.
+    This will be passed to dj_rest_auth_conf for configuration
     """
-    email = serializers.EmailField(required=True)
-    first_name = serializers.CharField(required=True)
-    last_name = serializers.CharField(required=False)
+    first_name = serializers.CharField(required=False, max_length=30)
+    last_name = serializers.CharField(required=False, max_length=150, allow_blank=True)
 
-    def get_cleaned_data(self):
-        super(RegisterSerializer, self).get_cleaned_data()
-        return {
-            'email': self.validated_data.get('email', ''),
-            'password1': self.validated_data.get('password1', ''),
-            'password2': self.validated_data.get('password2', ''),
-            'first_name': self.validated_data.get('first_name', ''),
-            'last_name': self.validated_data.get('last_name', '')
-        }
+    def custom_signup(self, request, user):
+        user.first_name = self.validated_data.get('first_name', '')
+        user.last_name = self.validated_data.get('last_name', '')
+        user.save()

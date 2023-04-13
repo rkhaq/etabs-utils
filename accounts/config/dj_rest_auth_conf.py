@@ -9,7 +9,8 @@ REST_AUTH = {
     'PASSWORD_RESET_CONFIRM_SERIALIZER': 'dj_rest_auth.serializers.PasswordResetConfirmSerializer',
     'PASSWORD_CHANGE_SERIALIZER': 'dj_rest_auth.serializers.PasswordChangeSerializer',
 
-    'REGISTER_SERIALIZER': 'dj_rest_auth.registration.serializers.RegisterSerializer',
+    # 'REGISTER_SERIALIZER': 'dj_rest_auth.registration.serializers.RegisterSerializer',
+     'REGISTER_SERIALIZER': 'accounts.serializers.RegisterSerializer',
 
     'REGISTER_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',),
 
@@ -29,7 +30,7 @@ REST_AUTH = {
     'JWT_AUTH_REFRESH_COOKIE': 'teamflow-refresh-token',
     'JWT_AUTH_REFRESH_COOKIE_PATH': '/',
     'JWT_AUTH_SECURE': False,
-    'JWT_AUTH_HTTPONLY': True,
+    'JWT_AUTH_HTTPONLY': False,
     'JWT_AUTH_SAMESITE': 'Lax',
     'JWT_AUTH_RETURN_EXPIRATION': False,
     'JWT_AUTH_COOKIE_USE_CSRF': False,
@@ -38,8 +39,7 @@ REST_AUTH = {
     
 }
 
-REST_AUTH_SERIALIZERS = {
-     'LOGIN_SERIALIZER': 'dj_rest_auth.serializers.EmailLoginSerializer',
-     'TOKEN_SERIALIZER': 'dj_rest_auth.serializers.TokenSerializer',
-     'REGISTER_SERIALIZER': 'accounts.serializers.RegisterSerializer',
-}
+# REST_AUTH_SERIALIZERS = {
+#      'LOGIN_SERIALIZER': 'dj_rest_auth.serializers.EmailLoginSerializer',
+#      'TOKEN_SERIALIZER': 'dj_rest_auth.serializers.TokenSerializer',
+# }
